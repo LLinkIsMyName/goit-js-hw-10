@@ -91,10 +91,9 @@ document.getElementById("datetime-picker").addEventListener("change", () => {
 
     function stopTimer() {
         clearInterval(countdownInterval);
-        // Additional actions to perform when the timer stops
     }
 
     function addLeadingZero(value) {
-        return value < 10 ? `0${value}` : `${value}`;
+        return String(value).padStart(2, '0');
     }
 });
