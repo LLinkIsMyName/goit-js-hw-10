@@ -75,6 +75,16 @@ document.getElementById("datetime-picker").addEventListener("change", () => {
     function updateTimer(endDate) {
         const currentDate = new Date();
         const remainingTime = endDate - currentDate;
+
+        if (remainingTime <= 0) {
+            stopTimer();
+            document.querySelector('.timer [data-days]').textContent = '00';
+            document.querySelector('.timer [data-hours]').textContent = '00';
+            document.querySelector('.timer [data-minutes]').textContent = '00';
+            document.querySelector('.timer [data-seconds]').textContent = '00';
+            return;
+        }
+
         const { days, hours, minutes, seconds } = convertMs(remainingTime);
 
         if (!isNaN(days) && !isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)) {
@@ -83,11 +93,8 @@ document.getElementById("datetime-picker").addEventListener("change", () => {
             document.querySelector('.timer [data-minutes]').textContent = addLeadingZero(minutes);
             document.querySelector('.timer [data-seconds]').textContent = addLeadingZero(seconds);
         }
-
-        if (remainingTime <= 0) {
-            stopTimer();
-        }
     }
+
 
     function stopTimer() {
         clearInterval(countdownInterval);
